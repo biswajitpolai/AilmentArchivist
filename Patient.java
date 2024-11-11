@@ -1,6 +1,7 @@
 import java.sql.*;
 
-class Patients {
+class Patients 
+{
     private int patientId;
     private String date;
     private String name;
@@ -40,7 +41,8 @@ class Patients {
         calculate();
     }
 
-    private void calculate() {
+    private void calculate()
+    {
         BMI = (float) (weight / (height * height));
         if (BMI <= 18.5)
             htWtCheck = "underweight";
@@ -90,7 +92,8 @@ class Patients {
         }
     }
 
-    public void saveToDatabase() {
+    public void saveToDatabase() 
+    {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
             String query = "INSERT INTO patients (patient_id, date, name, height, weight, blood_pressure_sys, blood_pressure_dias, sugar_fasting, sugar_post_meal, red_cell_count, white_cell_count, haemoglobin, pH, glucose, protein, bilirubin, blood, leukocytes, BMI, ht_wt_check, BP_check, sugar_check, CBC_check, urine_check, mental_health) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -127,7 +130,8 @@ class Patients {
         }
     }
 
-    public static void displayAll() {
+    public static void displayAll()
+    {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
             String query = "SELECT * FROM patients";
             Statement stmt = conn.createStatement();
@@ -185,12 +189,14 @@ class Patients {
                 System.out.println("Mental Health Status: " + mentalHealth);
                 System.out.println("==========================================");
             }
-        } catch (SQLException e) {
+        } catch (SQLException e) 
+        {
             e.printStackTrace();
         }
     }
 
-    public static void deletePatient(int id) {
+    public static void deletePatient(int id) 
+    {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
             String query = "DELETE FROM patients WHERE patient_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
